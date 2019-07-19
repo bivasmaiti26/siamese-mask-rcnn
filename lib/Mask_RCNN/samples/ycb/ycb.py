@@ -23,6 +23,9 @@ class YCBDataset(utils.Dataset):
         TODO-Add more functionality here later
         """
         self.dataset_folder = 'ycb/data'
+        
+        for i in range(21):
+            self.add_class('coco',i,chr(65+i))
         root_folders = os.listdir(dataset_folder)
         i = -1
         for folder in root_folders:
