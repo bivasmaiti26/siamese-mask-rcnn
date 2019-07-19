@@ -49,9 +49,11 @@ class YCBDataset(utils.Dataset):
         """
         mask_image = cv2.imread(dataset_folder+'/'+self.image_info[1]['path']+'-label.png')[:,:,0]  
         classes = np.unique(mask_image)
+        classes = np.delete(classes,0)
         mask = np.zeros([480, 640,len(classes)], dtype=np.uint8)
         i = 0
-        for obj_class in classes and obj_class>0:
+        for obj_class in classes :
+            if obj_class> 0
             mask[:,:,i] = mask_image == obj_class
             i += 1
         return mask,classes
