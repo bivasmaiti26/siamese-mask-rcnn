@@ -315,10 +315,11 @@ class IndexedYCBDataset(ycb.YCBDataset):
         pass
         self.image_category_index = IndexedYCBDataset._build_image_category_index(self)
         self.category_image_index = IndexedYCBDataset._build_category_image_index(self.image_category_index)
+        
     def _build_image_category_index(self):
         image_category_index = []
         for image in self.image_info:
-            mask_image = cv2.imread(dataset_folder+'/'+image['path']+'-label.png')[:,:,0]
+            mask_image = cv2.imread(self.dataset_folder+'/'+image['path']+'-label.png')[:,:,0]
             classes = np.unique(mask_image)
             image_category_index.append(list(classes))
         return image_category_index
