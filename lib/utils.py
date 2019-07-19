@@ -10,6 +10,7 @@ import skimage.io
 import skimage.transform as skt
 import imgaug
 import matplotlib.pyplot as plt
+
 plt.rcParams['figure.figsize'] = (12.0, 6.0)
 
 MASK_RCNN_MODEL_PATH = 'Mask_RCNN/'
@@ -18,6 +19,7 @@ if MASK_RCNN_MODEL_PATH not in sys.path:
     sys.path.append(MASK_RCNN_MODEL_PATH)
     
 from samples.coco import coco
+from samples.ycb import ycb
 from mrcnn import utils
 from mrcnn import model as modellib
 from mrcnn import visualize  
@@ -299,7 +301,40 @@ def siamese_data_generator(dataset, config, shuffle=True, augmentation=imgaug.au
                 
                 
 ### Dataset Utils ###
+class IndexedYCBDataset(ycb.YCBDataset):
+    def __init__(self):
+        super(IndexedYCBDataset, self).__init__()
+        self.active_classes = []
+    def build_indices(self):
+        """
+        Build image category index and category image index.
+        image_category_index is list of lists() 
+        category_image_index is list of np arrays(image_ids) ->list of 
+        """
+        pass
+        self.image_category_index = IndexedYCBDataset._build_image_category_index(self)
+        self.category_image_index = IndexedYCBDataset._build_category_image_index(self.image_category_index)
+    def _build_image_category_index(self):
+        for image in images:
+        mask_image = cv2.imread(dataset_folder+'/'+image['path']+'-label.png')[:,:,0]
+        classes = np.unique(mask_image)
+        image_category_index.append(list(classes))
+        
+    def _build_category_image_index(image_category_index):
+        category_image_index = []
+        # Loop through all 81 Mask-RCNN classes/categories
+        for category in range(max(max(image_category_index))+1):
+            # Find all images corresponding to the selected class/category 
+            images_per_category = np.where(\
+                [any(image_category_index[i][j] == category\
+                 for j in range(len(image_category_index[i])))\
+                 for i in range(len(image_category_index))])[0]
+            # Put list together
+            category_image_index.append(images_per_category)
+        return category_image_index
 
+
+        
 class IndexedCocoDataset(coco.CocoDataset):
     
     def __init__(self):
