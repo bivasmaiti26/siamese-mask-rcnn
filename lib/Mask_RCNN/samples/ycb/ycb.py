@@ -17,7 +17,7 @@ class YCBDataset(utils.Dataset):
     """
 
     """
-    def load_ycb(self, count=0):
+    def load_ycb(self, count_images = 0):
         """Generate the requested number of images from the dataset.
         count: number of images to generate. If set to 0, get all images
         """
@@ -30,11 +30,11 @@ class YCBDataset(utils.Dataset):
         for file in files:
             if fnmatch.fnmatch(file, '*color*'):
                 i+=1
-                if i > count:
+                if i > count_images:
                     break
                 image_file_id = file.split('-')[0]
                 self.add_image("ycb", image_id = i, path = folder + '/' + image_file_id) 
-        if i > count:
+        if i > count_images:
             break
          
     def load_image(self, image_id):
