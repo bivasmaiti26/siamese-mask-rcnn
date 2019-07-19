@@ -53,7 +53,6 @@ class YCBDataset(utils.Dataset):
         mask = np.zeros([480, 640,len(classes)], dtype=np.uint8)
         i = 0
         for obj_class in classes :
-            if obj_class> 0
             mask[:,:,i] = mask_image == obj_class
             i += 1
         return mask,classes
