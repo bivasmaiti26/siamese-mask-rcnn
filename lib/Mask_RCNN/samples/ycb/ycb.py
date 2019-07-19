@@ -22,6 +22,7 @@ class YCBDataset(utils.Dataset):
         count: number of images to generate. If set to 0, get all images
         TODO-Add more functionality here later
         """
+        self.dataset_folder = 'ycb/data'
         root_folders = os.listdir(dataset_folder)
         i = 0
         for folder in root_folders:
@@ -40,6 +41,7 @@ class YCBDataset(utils.Dataset):
         """Load the image from the file with the image id
         """
         image = cv2.imread(dataset_folder+'/'+self.image_info[image_id]['path']+'-color.png')
+        print(dataset_folder+'/'+self.image_info[image_id]['path']+'-color.png')
         return image
         
     def load_mask(self, image_id):
@@ -52,6 +54,7 @@ class YCBDataset(utils.Dataset):
         for obj_class in classes and obj_class>0:
             mask[:,:,i] = mask_image == obj_class
             i += 1
+        return mask,classes
 
     def image_reference(self, image_id):
         """Return the shapes data of the image."""
