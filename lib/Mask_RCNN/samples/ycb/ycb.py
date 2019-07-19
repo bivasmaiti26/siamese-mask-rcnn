@@ -24,7 +24,7 @@ class YCBDataset(utils.Dataset):
         """
         self.dataset_folder = 'ycb/data'
         root_folders = os.listdir(dataset_folder)
-        i = 0
+        i = -1
         for folder in root_folders:
             files = os.listdir(dataset_folder+'/'+ folder)
             for file in files:
@@ -41,7 +41,7 @@ class YCBDataset(utils.Dataset):
     def load_image(self, image_id):
         """Load the image from the file with the image id
         """
-        image = cv2.imread(dataset_folder+'/'+self.image_info[image_id]['path']+'-color.png')
+        image = cv2.imread(dataset_folder+'/'+self.image_info['id']['path']+'-color.png')
         print(dataset_folder+'/'+self.image_info[image_id]['path']+'-color.png')
         return image
         
