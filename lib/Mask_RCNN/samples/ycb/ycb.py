@@ -47,7 +47,7 @@ class YCBDataset(utils.Dataset):
     def load_mask(self, image_id):
         """Generate instance masks for the image of the given image ID.
         """
-        mask_image = cv2.imread(dataset_folder+'/'+dataset_ycb.image_info[1]['path']+'-label.png')[:,:,0]  
+        mask_image = cv2.imread(dataset_folder+'/'+self.image_info[1]['path']+'-label.png')[:,:,0]  
         classes = np.unique(mask_image)
         mask = np.zeros([480, 640,len(classes)], dtype=np.uint8)
         i = 0
