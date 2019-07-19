@@ -33,7 +33,7 @@ class YCBDataset(utils.Dataset):
                     if i > count_images:
                         break
                     image_file_id = file.split('-')[0]
-                    self.add_image("ycb", image_id = i, path = folder + '/' + image_file_id,) 
+                    self.add_image("ycb", image_id = i, path = folder + '/' + image_file_id) 
                     
             if i > count_images:
                 break
