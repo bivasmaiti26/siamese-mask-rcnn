@@ -21,21 +21,21 @@ class YCBDataset(utils.Dataset):
         """Generate the requested number of images from the dataset.
         count: number of images to generate. If set to 0, get all images
         """
-    print(os.getcwd())
-    dataset_folder = 'ycb/data'
-    root_folders = os.listdir(dataset_folder)
-    i = 0
-    for folder in root_folders:
-        files = os.listdir(dataset_folder+'/'+ folder)
-        for file in files:
-            if fnmatch.fnmatch(file, '*color*'):
-                i+=1
-                if i > count_images:
-                    break
-                image_file_id = file.split('-')[0]
-                self.add_image("ycb", image_id = i, path = folder + '/' + image_file_id) 
-        if i > count_images:
-            break
+        print(os.getcwd())
+        dataset_folder = 'ycb/data'
+        root_folders = os.listdir(dataset_folder)
+        i = 0
+        for folder in root_folders:
+            files = os.listdir(dataset_folder+'/'+ folder)
+            for file in files:
+                if fnmatch.fnmatch(file, '*color*'):
+                    i+=1
+                    if i > count_images:
+                        break
+                    image_file_id = file.split('-')[0]
+                    self.add_image("ycb", image_id = i, path = folder + '/' + image_file_id) 
+            if i > count_images:
+                break
          
     def load_image(self, image_id):
         """Load the image from the file with the image id
