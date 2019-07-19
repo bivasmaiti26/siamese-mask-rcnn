@@ -33,7 +33,8 @@ class YCBDataset(utils.Dataset):
                     if i > count_images:
                         break
                     image_file_id = file.split('-')[0]
-                    self.add_image("ycb", image_id = i, path = folder + '/' + image_file_id) 
+                    self.add_image("ycb", image_id = i, path = folder + '/' + image_file_id,) 
+                    
             if i > count_images:
                 break
          
@@ -47,7 +48,8 @@ class YCBDataset(utils.Dataset):
     def load_mask(self, image_id):
         """Generate instance masks for the image of the given image ID.
         """
-        mask_image = cv2.imread(dataset_folder+'/'+self.image_info[1]['path']+'-label.png')[:,:,0]  
+        
+        mask_image = cv2.imread(dataset_folder+'/'+self.image_info[image_id]['path']+'-label.png')[:,:,0]  
         classes = np.unique(mask_image)
         classes = np.delete(classes,0)
         mask = np.zeros([480, 640,len(classes)], dtype=np.uint8)
