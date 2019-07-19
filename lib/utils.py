@@ -312,7 +312,6 @@ class IndexedYCBDataset(ycb.YCBDataset):
         image_category_index is list of lists() 
         category_image_index is list of np arrays(image_ids) ->list of 
         """
-        pass
         self.image_category_index = IndexedYCBDataset._build_image_category_index(self)
         self.category_image_index = IndexedYCBDataset._build_category_image_index(self.image_category_index)
         
