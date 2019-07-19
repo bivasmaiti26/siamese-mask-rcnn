@@ -22,7 +22,7 @@ class YCBDataset(utils.Dataset):
         count: number of images to generate. If set to 0, get all images
         """
     print(os.getcwd())
-    dataset_folder = '/ycb/data'
+    dataset_folder = 'ycb/data'
     root_folders = os.listdir(dataset_folder)
     i = 0
     for folder in root_folders:
