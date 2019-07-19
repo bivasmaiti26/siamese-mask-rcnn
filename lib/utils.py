@@ -7,6 +7,7 @@ import time
 import random
 import numpy as np
 import skimage.io
+import cv2
 import skimage.transform as skt
 import imgaug
 import matplotlib.pyplot as plt
