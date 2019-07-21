@@ -45,7 +45,6 @@ class YCBDataset(utils.Dataset):
         """Load the image from the file with the image id
         """
         image = cv2.imread(dataset_folder+'/'+self.image_info[image_id]['path']+'-color.png')
-        print(dataset_folder+'/'+self.image_info[image_id]['path']+'-color.png')
         return image
         
     def load_mask(self, image_id):
