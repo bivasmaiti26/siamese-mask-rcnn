@@ -303,9 +303,10 @@ def siamese_data_generator(dataset, config, shuffle=True, augmentation=imgaug.au
                 
 ### Dataset Utils ###
 class IndexedYCBDataset(ycb.YCBDataset):
-    def __init__(self):
+    def __init__(self, type = 'train'):
         super(IndexedYCBDataset, self).__init__()
         self.active_classes = []
+        self.type = type
     def build_indices(self):
         """
         Build image category index and category image index.
