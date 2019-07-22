@@ -22,9 +22,9 @@ class YCBDataset(utils.Dataset):
         TODO-Add more functionality here later
         """
         if self.type = 'train':
-            self.dataset_folder = 'ycb_train' 
+            self.dataset_folder == 'ycb_train' 
         else:
-            self.dataset_folder = 'ycb_val'
+            self.dataset_folder == 'ycb_val'
         for i in range(21):
             self.add_class('ycb',i,chr(65+i))
         root_folders = os.listdir(self.dataset_folder)
