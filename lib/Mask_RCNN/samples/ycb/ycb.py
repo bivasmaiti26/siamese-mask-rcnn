@@ -12,7 +12,6 @@ ROOT_DIR = os.path.abspath("../../")
 sys.path.append(ROOT_DIR)  # To find local version of the library
 from mrcnn.config import Config
 from mrcnn import utils
-dataset_folder = 'ycb/data'
 class YCBDataset(utils.Dataset):
     """
 
@@ -22,13 +21,16 @@ class YCBDataset(utils.Dataset):
         count: number of images to generate. If set to 0, get all images
         TODO-Add more functionality here later
         """
-        self.dataset_folder = 'ycb_train' if self.type = 'train' else 'ycb_val'
+        if self.type = 'train':
+            self.dataset_folder = 'ycb_train' 
+        else:
+            self.dataset_folder = 'ycb_val'
         for i in range(21):
             self.add_class('ycb',i,chr(65+i))
-        root_folders = os.listdir(dataset_folder)
+        root_folders = os.listdir(self.dataset_folder)
         i = -1
         for folder in root_folders:
-            files = os.listdir(dataset_folder+'/'+ folder)
+            files = os.listdir(self.dataset_folder+'/'+ folder)
             for file in files:
                 if fnmatch.fnmatch(file, '*color*'):
                     i+=1
@@ -43,14 +45,14 @@ class YCBDataset(utils.Dataset):
     def load_image(self, image_id):
         """Load the image from the file with the image id
         """
-        image = cv2.imread(dataset_folder+'/'+self.image_info[image_id]['path']+'-color.png')
+        image = cv2.imread(self.dataset_folder+'/'+self.image_info[image_id]['path']+'-color.png')
         return image
         
     def load_mask(self, image_id):
         """Generate instance masks for the image of the given image ID.
         """
         
-        mask_image = cv2.imread(dataset_folder+'/'+self.image_info[image_id]['path']+'-label.png')[:,:,0]  
+        mask_image = cv2.imread(self.dataset_folder+'/'+self.image_info[image_id]['path']+'-label.png')[:,:,0]  
         classes = np.unique(mask_image)
         classes = np.delete(classes,0)
         mask = np.zeros([480, 640,len(classes)], dtype=np.uint8)
