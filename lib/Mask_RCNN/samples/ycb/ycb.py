@@ -22,8 +22,7 @@ class YCBDataset(utils.Dataset):
         count: number of images to generate. If set to 0, get all images
         TODO-Add more functionality here later
         """
-        self.dataset_folder = 'ycb/data'
-        
+        self.dataset_folder = 'ycb_train' if self.type = 'train' else 'ycb_val'
         for i in range(21):
             self.add_class('ycb',i,chr(65+i))
         root_folders = os.listdir(dataset_folder)
